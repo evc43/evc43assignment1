@@ -103,14 +103,14 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     public T first(){
         if (this.isEmpty()) {
-            throw new EmptySequenceException("empth");
+            return null;
         }
         return (T)array[0];
     }
 
     public T last(){
         if (this.isEmpty()) {
-            throw new EmptySequenceException("empth");
+            return null;
         }
         return (T)(array[size-1]);
     }
