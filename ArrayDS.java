@@ -222,6 +222,11 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     }
 
     public SequenceInterface<T> slice(int start, int numItems){
+
+        if (start + numItems > size) {
+            return null;
+        }
+
         ArrayDS<T> newArrayDS = new ArrayDS<T>();
         
         for(int i = 0; i<numItems; i++){
@@ -270,19 +275,15 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     @Override
     public int compareTo(ArrayDS<T> o) {
         if (o.size > this.size) {
-            System.out.println("Less");
             return -1;
         } else if (this.size > o.size) {
-            System.out.println("More");
             return 1;
         } else {
             for (int i = 0; i < this.size; i++) {
                 if (this.itemAt(i).compareTo(o.itemAt(i)) != 0) {
-                    System.out.println(this.itemAt(i).compareTo(o.itemAt(i)));
                     return this.itemAt(i).compareTo(o.itemAt(i));
                 }
             }
-            System.out.println("Neither");
             return 0;
         }
     }
