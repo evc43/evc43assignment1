@@ -70,6 +70,9 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
         {
             doubleCapacity();
         }
+        if (position > size) {
+            throw new IndexOutOfBoundsException();
+        }
         for (int i = size-1; i>=position ;  i--){
             array[i+1]=array[i];
         }
@@ -80,6 +83,9 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     public T itemAt(int position)
     {
+        if (position > size-1 || position<0) {
+            throw new IndexOutOfBoundsException();
+        }
         return (T)array[position];
 
     }
@@ -223,10 +229,9 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     public void reverse(){
         Object[] newArray= new Object[array.length];
         for (int i=0; i<size; i++){
-            newArray[size-i-1]=array[i];
+            newArray[size-i-1]=this.itemAt(i);
         } 
-
-
+        array = newArray;
     }
 
     public void rotateRight(){
