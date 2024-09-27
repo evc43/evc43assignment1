@@ -128,6 +128,11 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     }
 
+     public void shuffle(int[] oldPositions, int[] newPositions){
+
+    }
+
+
     public void clear(){
         while(!isEmpty()){
             deleteTail();
