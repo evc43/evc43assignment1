@@ -100,7 +100,7 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     }
 
     public T last(){
-        return (T)array[size-1];
+        return (T)(array[size-1]);
     }
 
     public T predecessor(T item){
@@ -116,7 +116,7 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     public int getFrequencyOf(T item){
         int counter=0;
-        for(int i=1; i<size; i++){
+        for(int i=0; i<size; i++){
             if (array[i].equals(item)){
                 counter++;
                 
@@ -128,11 +128,6 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     }
 
-     public void shuffle(int[] oldPositions, int[] newPositions){
-
-    }
-
-
     public void clear(){
         while(!isEmpty()){
             deleteTail();
@@ -142,7 +137,7 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     public int lastOccurrenceOf(T item){
         int counter=-1;
-        for(int i=1; i<size; i++){
+        for(int i=0; i<size; i++){
             if (array[i].equals(item)){
                 counter=i;
                 
@@ -157,6 +152,9 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
         Object delete=array[0];
         for (int i=0; i<size-1;i++)
         {
+            if(isEmpty()){
+                throw new EmptySequenceException("empty");
+            }
             array[i]=array[i+1];
             
         }
@@ -194,6 +192,7 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
         for(int i = start; i<this.size-numItems; i++){
             this.array[i] = array[i+numItems];
         }
+        size -= numItems;
         return true;
 
     }
@@ -241,9 +240,13 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
 
     }
 
+    public void shuffle(int[] oldPositions, int[] newPositions){
+
+    }
+
     @Override
     public String toString() {
-        if (array[0].toString() == null || isEmpty())  {
+        if (isEmpty() || array[0].toString() == null)  {
             return "";
         }
         String string = "";
