@@ -102,10 +102,16 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     }
 
     public T first(){
+        if (this.isEmpty()) {
+            throw new EmptySequenceException("empth");
+        }
         return (T)array[0];
     }
 
     public T last(){
+        if (this.isEmpty()) {
+            throw new EmptySequenceException("empth");
+        }
         return (T)(array[size-1]);
     }
 
@@ -155,12 +161,12 @@ public class ArrayDS<T extends Comparable<? super T>> implements SequenceInterfa
     }
 
     public T deleteHead(){
+        if(isEmpty()){
+            throw new EmptySequenceException("empty");
+        }
         Object delete=array[0];
         for (int i=0; i<size-1;i++)
         {
-            if(isEmpty()){
-                throw new EmptySequenceException("empty");
-            }
             array[i]=array[i+1];
             
         }
